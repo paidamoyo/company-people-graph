@@ -12,16 +12,19 @@ company-people-graph
 ```
 ./gradlew
 ```
+## Run application
 
-
+```
+./gradlew run 
+```
 ## Development Setup with IntelliJ
 
 ```
-$ gradle idea
+$ ./gradlew idea
 $ open *.ipr  #on OSX
 ```
 *
-Anytime you adjust the gradle build files, you have to rerun `gradle idea` and
+Anytime you adjust the gradle build files, you have to rerun `./gradlew idea` and
 let the IDE reload the project.
 
 * Install "lombok" plugin & Enable: Settings -> Compiler -> Annotation Processor -> Enable annotation processing

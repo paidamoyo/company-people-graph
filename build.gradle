@@ -1,14 +1,27 @@
 
-apply plugin: 'java'
-
 apply plugin: 'idea'
+
+apply plugin: 'maven'
+
+apply plugin:'application'
 
 repositories {
     jcenter()
 }
 
 
+mainClassName = "com.graph.application.Main"
+
 dependencies {
-    testCompile 'junit:junit:4.12'
+    testCompile "junit:junit:4.12"
+    compile "org.projectlombok:lombok:1.16.+"
 }
 
+
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            repository(url: "file://localhost/tmp/myRepo/")
+        }
+    }
+}

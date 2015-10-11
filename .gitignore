@@ -5,6 +5,7 @@
 *.log
 .idea/
 .gradle/
+/build
 
 
 #Eclipse ignores
