@@ -11,7 +11,7 @@ public class Main {
         Path company = Paths.get(args[0]);
         Path people = Paths.get(args[1]);
 
-//        new CompanyProcessor(company).process();
+//        new CompanyProcessor(company).getCompanies();
 
     }
 

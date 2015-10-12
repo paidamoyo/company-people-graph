@@ -7,21 +7,25 @@ apply plugin:'application'
 
 repositories {
     jcenter()
+    mavenCentral()
 }
 
 
-mainClassName = "com.graph.application.Main"
+mainClassName = 'com.graph.application.Main'
 
 dependencies {
-    testCompile "junit:junit:4.12"
-    compile "org.projectlombok:lombok:1.16.+"
+    testCompile 'junit:junit:4.12'
+    compile 'org.projectlombok:lombok:1.16.+'
+    compile 'com.google.guava:guava:18.0'
 }
 
 
-uploadArchives {
+task installArchives(type: Upload) {
+    description "Installs the artifacts to the local Maven repository."
+    configuration = configurations['archives']
     repositories {
         mavenDeployer {
-            repository(url: "file://localhost/tmp/myRepo/")
+            repository url: "file://${System.properties['user.home']}/.m2/repository"
         }
     }
 }
