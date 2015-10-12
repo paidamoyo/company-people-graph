@@ -24,17 +24,19 @@ public class CompanyProcessor {
                     .transform(this::createCompany)
                     .toList();
         } catch (IOException e) {
-            System.out.println("file reading exception:" + e);
-            throw new CompanyProcessorException("file reading exception", e);
+            String message = String.format("error reading file: %s ", path);
+            System.out.println(message + e);
+            throw new CompanyProcessorException(message, e);
 
         }
     }
 
     private Company createCompany(String line) {
         String[] company = line.split(",");
-        if(company.length != 2){
-            System.out.println("file is not formatted correctly");
-            throw new CompanyProcessorException("file is not formatted correctly, there should be 2 commas only");
+        if (company.length != 2) {
+            String message = String.format("error in file: %s line: %s is not formatted correctly", path, line);
+            System.out.println(message);
+            throw new CompanyProcessorException(message);
         }
         return Company.from(company[0], company[1]);
     }

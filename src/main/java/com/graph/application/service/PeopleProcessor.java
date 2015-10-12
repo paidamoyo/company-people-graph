@@ -11,6 +11,8 @@ import com.graph.domain.Person;
 
 public class PeopleProcessor {
 
+    public static final int PERSON_LINE_ARRAY_ITEMS = 3;
+    public static final int FULL_NAME_ARRAY_SIZE = 2;
     private Path path;
 
 
@@ -25,24 +27,40 @@ public class PeopleProcessor {
                     .transform(line -> createPerson(line, companies))
                     .toList();
         } catch (IOException e) {
-            System.out.println("file reading exception:" + e);
-            throw new PeopleProcessorException("file reading exception", e);
+            String message = "error reading file: " + path + " ";
+            System.out.println(message + e);
+            throw new PeopleProcessorException(message, e);
 
         }
     }
 
     private Person createPerson(String line, List<Company> companies) {
-        String[] people = line.split(",");
-        String[] fullName = people[0].split(" ");
-        String email = people[1];
-        String companyName = people[2];
+        String[] person = line.split(",");
 
+        if (person.length != PERSON_LINE_ARRAY_ITEMS) {
+            String message = String.format("error in file: %s line: %s is not formatted correctly", path, line);
+            throwException(message);
+        }
+
+        String[] fullName = person[0].split(" ");
+        if (fullName.length != FULL_NAME_ARRAY_SIZE) {
+            String message = String.format("error in file: %s line: %s fullname is not formatted correctly", path, line);
+            throwException(message);
+        }
+
+        String email = person[1];
+
+        String companyName = person[2];
         Company company = findCompanyByName(companies, companyName);
-
 
         return Person.from(fullName[0], fullName[1], email, company);
 
 
+    }
+
+    private void throwException(String message) {
+        System.out.println(message);
+        throw new PeopleProcessorException(message);
     }
 
     private Company findCompanyByName(List<Company> companies, String companyName) {
