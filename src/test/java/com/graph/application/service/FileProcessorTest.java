@@ -5,6 +5,7 @@ import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.List;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import com.graph.domain.Company;
@@ -14,12 +15,21 @@ import static org.junit.Assert.assertThat;
 
 public class FileProcessorTest {
 
+    private Path currentDirectory;
+
+    @Before
+    public void setUp() throws Exception {
+        currentDirectory = Paths.get("").toAbsolutePath();
+
+    }
+
     @Test
     public void shouldProcessWellFormattedCompanies() throws Exception {
         //given
-        Path pathCompany = Paths.get("/Users/ashchapfuwa/Dropbox/projects/personal/company-people-graph/src/test/resources/Companies.txt");
 
-        Path pathPeople = Paths.get("/Users/ashchapfuwa/Dropbox/projects/personal/company-people-graph/src/test/resources/People.txt");
+        Path pathCompany = Paths.get(String.format("%s/src/test/resources/Companies.txt", currentDirectory.toString()));
+        Path pathPeople = Paths.get(String.format("%s/src/test/resources/People.txt", currentDirectory.toString()));
+
 
         FileProcessor fileProcessor = new FileProcessor(pathCompany, pathPeople);
 

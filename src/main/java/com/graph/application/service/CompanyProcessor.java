@@ -18,9 +18,10 @@ public class CompanyProcessor {
     }
 
     public List<Company> getCompanies() {
+
         try {
             return FluentIterable.from(Files.readAllLines(path))
-                    .transform(this::addCompany)
+                    .transform(this::createCompany)
                     .toList();
         } catch (IOException e) {
             System.out.println("file reading exception:" + e);
@@ -29,8 +30,12 @@ public class CompanyProcessor {
         }
     }
 
-    private Company addCompany(String line) {
+    private Company createCompany(String line) {
         String[] company = line.split(",");
+        if(company.length != 2){
+            System.out.println("file is not formatted correctly");
+            throw new CompanyProcessorException("file is not formatted correctly, there should be 2 commas only");
+        }
         return Company.from(company[0], company[1]);
     }
 }

@@ -3,7 +3,6 @@ package com.graph.application.service;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.ArrayList;
 import java.util.List;
 
 import com.google.common.collect.FluentIterable;
@@ -14,7 +13,6 @@ public class PeopleProcessor {
 
     private Path path;
 
-    private List<Person> people = new ArrayList<>();
 
     public PeopleProcessor(Path path) {
         this.path = path;
@@ -24,7 +22,7 @@ public class PeopleProcessor {
 
         try {
             return FluentIterable.from(Files.readAllLines(path))
-                    .transform(line -> addPeople(line, companies))
+                    .transform(line -> createPerson(line, companies))
                     .toList();
         } catch (IOException e) {
             System.out.println("file reading exception:" + e);
@@ -33,7 +31,7 @@ public class PeopleProcessor {
         }
     }
 
-    private Person addPeople(String line, List<Company> companies) {
+    private Person createPerson(String line, List<Company> companies) {
         String[] people = line.split(",");
         String[] fullName = people[0].split(" ");
         String email = people[1];
