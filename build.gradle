@@ -10,8 +10,13 @@ repositories {
     mavenCentral()
 }
 
+run {
+    if ( project.hasProperty('filePaths') ) {
+        args(filePaths.split(','))
+    }
+    mainClassName = 'com.graph.application.Main'
+}
 
-mainClassName = 'com.graph.application.Main'
 
 dependencies {
     testCompile 'junit:junit:4.12'

@@ -15,7 +15,7 @@ company-people-graph
 ## Run application
 
 ```
-./gradlew run 
+./gradlew run '-PfilePaths=companyTxtFilePath,peopleTxtFilePath'
 ```
 ## Development Setup with IntelliJ
 

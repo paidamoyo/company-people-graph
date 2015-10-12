@@ -3,15 +3,19 @@ package com.graph.application;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+import com.graph.application.service.FileProcessor;
+
 public class Main {
 
     public static void main(String[] args) {
         System.out.println("app is running!");
 
-        Path company = Paths.get(args[0]);
-        Path people = Paths.get(args[1]);
+        Path pathCompany = Paths.get(args[0]);
+        Path pathPeople = Paths.get(args[1]);
 
-//        new CompanyProcessor(company).getCompanies();
+        String people = new FileProcessor(pathCompany, pathPeople).getPeople().toString();
+
+        System.out.println("all people are:" + people);
 
     }
 
