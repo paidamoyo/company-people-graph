@@ -11,8 +11,10 @@ import com.graph.domain.Person;
 
 public class PeopleProcessor {
 
-    public static final int PERSON_LINE_ARRAY_ITEMS = 3;
-    public static final int FULL_NAME_ARRAY_SIZE = 2;
+    public static final int PERSON_LINE_ITEM_LENGTH = 3;
+    public static final int FULL_NAME_ARRAY_LENGTH = 2;
+    public static final String PERSON_LINE_ITEM_SEPARATOR = ",";
+    public static final String NAME_SURNAME_SEPARATOR = " ";
     private Path path;
 
 
@@ -35,15 +37,15 @@ public class PeopleProcessor {
     }
 
     private Person createPerson(String line, List<Company> companies) {
-        String[] person = line.split(",");
+        String[] person = line.split(PERSON_LINE_ITEM_SEPARATOR);
 
-        if (person.length != PERSON_LINE_ARRAY_ITEMS) {
+        if (person.length != PERSON_LINE_ITEM_LENGTH) {
             String message = String.format("error in file: %s line: %s is not formatted correctly", path, line);
             throwException(message);
         }
 
-        String[] fullName = person[0].split(" ");
-        if (fullName.length != FULL_NAME_ARRAY_SIZE) {
+        String[] fullName = person[0].split(NAME_SURNAME_SEPARATOR);
+        if (fullName.length != FULL_NAME_ARRAY_LENGTH) {
             String message = String.format("error in file: %s line: %s fullname is not formatted correctly", path, line);
             throwException(message);
         }

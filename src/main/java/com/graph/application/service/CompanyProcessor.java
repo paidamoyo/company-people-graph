@@ -10,6 +10,8 @@ import com.graph.domain.Company;
 
 public class CompanyProcessor {
 
+    public static final int COMPANY_LINE_ITEMS_LENGTH = 2;
+    public static final String COMPANY_LINE_ITEMS_SEPARATOR = ",";
     private Path path;
 
 
@@ -32,8 +34,8 @@ public class CompanyProcessor {
     }
 
     private Company createCompany(String line) {
-        String[] company = line.split(",");
-        if (company.length != 2) {
+        String[] company = line.split(COMPANY_LINE_ITEMS_SEPARATOR);
+        if (company.length != COMPANY_LINE_ITEMS_LENGTH) {
             String message = String.format("error in file: %s line: %s is not formatted correctly", path, line);
             System.out.println(message);
             throw new CompanyProcessorException(message);
