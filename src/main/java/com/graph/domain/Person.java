@@ -12,18 +12,10 @@ public class Person implements Comparable {
     private final String name;
     private final String surname;
     private final String email;
-    private final Company company;
+    private final String companyName;
 
-    public static Person from(String name, String surname, String email, Company company) {
-        return new Person(name, surname, email, company);
-    }
-
-    public String getCompanyCity() {
-        return this.getCompany().getCity();
-    }
-
-    public String getCompanyName() {
-        return this.getCompany().getName();
+    public static Person from(String name, String surname, String email, String companyName) {
+        return new Person(name, surname, email, companyName);
     }
 
     @Override

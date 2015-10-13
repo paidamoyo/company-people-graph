@@ -3,6 +3,7 @@ package com.graph.application.service;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import org.junit.Before;
@@ -34,19 +35,20 @@ public class FileProcessorTest {
         FileProcessor fileProcessor = new FileProcessor(pathCompany, pathPeople);
 
         //when
-        List<Person> people = fileProcessor.getPeople();
+        List<Company> companies = fileProcessor.companyPeopleGraph();
 
         //then
-        Company allanGray = Company.from("Allan Gray", "Cape Town");
-        Company fitKey = Company.from("FitKey", "Joburg");
-        Company happyTown = Company.from("Happy Town", null);
+
+        Person benny = Person.from("Benny", "Ou", "bennyou.cpt@gmail.com", "Allan Gray");
+        Person evan = Person.from("Evan", "Walther", "evan@fitkey.co.za", "FitKey");
+        Person kelvin = Person.from("Kelvin", "Smith", "kelvin@fitkey.co.za", "FitKey");
+        Person joshua = Person.from("Joshua", "Shimkin", "josh@fitkey.co.za", "FitKey");
+
+        Company allanGray = Company.from("Allan Gray", "Cape Town", Collections.singletonList(benny));
+        Company fitKey = Company.from("FitKey", "Joburg", Arrays.asList(evan, kelvin, joshua));
+        Company thoughtWorks = Company.from("ThoughtWorks", "Joburg", Collections.EMPTY_LIST);
 
 
-        Person benny = Person.from("Benny", "Ou", "bennyou.cpt@gmail.com", allanGray);
-        Person evan = Person.from("Evan", "Walther", "evan@fitkey.co.za", fitKey);
-        Person kelvin = Person.from("Kelvin", "Smith", "kelvin@fitkey.co.za", fitKey);
-        Person joshua = Person.from("Joshua", "Shimkin", "josh@fitkey.co.za", fitKey);
-        Person mary = Person.from("Mary", "Jane", "mary.jane@happytown.co", happyTown);
-        assertThat(people, is(Arrays.asList(benny, evan, kelvin, joshua, mary)));
+        assertThat(companies, is(Arrays.asList(allanGray, fitKey, thoughtWorks)));
     }
 }

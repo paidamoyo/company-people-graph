@@ -6,7 +6,6 @@ import java.nio.file.Path;
 import java.util.List;
 
 import com.google.common.collect.FluentIterable;
-import com.graph.domain.Company;
 import com.graph.domain.Person;
 
 public class PeopleProcessor {
@@ -22,11 +21,11 @@ public class PeopleProcessor {
         this.path = path;
     }
 
-    public List<Person> getPeople(List<Company> companies) {
+    public List<Person> getPeople() {
 
         try {
             return FluentIterable.from(Files.readAllLines(path))
-                    .transform(line -> createPerson(line, companies))
+                    .transform(this::createPerson)
                     .toList();
         } catch (IOException e) {
             String message = "error reading file: " + path + " ";
@@ -36,7 +35,7 @@ public class PeopleProcessor {
         }
     }
 
-    private Person createPerson(String line, List<Company> companies) {
+    private Person createPerson(String line) {
         String[] person = line.split(PERSON_LINE_ITEM_SEPARATOR);
 
         if (person.length != PERSON_LINE_ITEM_LENGTH) {
@@ -53,9 +52,8 @@ public class PeopleProcessor {
         String email = person[1];
 
         String companyName = person[2];
-        Company company = findCompanyByName(companies, companyName);
 
-        return Person.from(fullName[0], fullName[1], email, company);
+        return Person.from(fullName[0], fullName[1], email, companyName);
 
 
     }
@@ -65,9 +63,5 @@ public class PeopleProcessor {
         throw new PeopleProcessorException(message);
     }
 
-    private Company findCompanyByName(List<Company> companies, String companyName) {
-        return FluentIterable.from(companies)
-                .firstMatch(input -> input.getName().equals(companyName))
-                .or(Company.from(companyName, null));
-    }
+
 }

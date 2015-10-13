@@ -6,7 +6,9 @@ import java.nio.file.Path;
 import java.util.List;
 
 import com.google.common.collect.FluentIterable;
+import com.google.common.collect.ImmutableList;
 import com.graph.domain.Company;
+import com.graph.domain.Person;
 
 public class CompanyProcessor {
 
@@ -19,11 +21,11 @@ public class CompanyProcessor {
         this.path = path;
     }
 
-    public List<Company> getCompanies() {
+    public List<Company> getCompanies(List<Person> people) {
 
         try {
             return FluentIterable.from(Files.readAllLines(path))
-                    .transform(this::createCompany)
+                    .transform(line -> createCompany(line, people))
                     .toList();
         } catch (IOException e) {
             String message = String.format("error reading file: %s ", path);
@@ -33,13 +35,26 @@ public class CompanyProcessor {
         }
     }
 
-    private Company createCompany(String line) {
+    private Company createCompany(String line, List<Person> people) {
         String[] company = line.split(COMPANY_LINE_ITEMS_SEPARATOR);
         if (company.length != COMPANY_LINE_ITEMS_LENGTH) {
             String message = String.format("error in file: %s line: %s is not formatted correctly", path, line);
             System.out.println(message);
             throw new CompanyProcessorException(message);
         }
-        return Company.from(company[0], company[1]);
+        String name = company[0];
+        String city = company[1];
+
+        final ImmutableList<Person> employees = findPeopleByCompanyName(people, name);
+
+        return Company.from(name, city, employees);
     }
+
+    private ImmutableList<Person> findPeopleByCompanyName(List<Person> people, String name) {
+        return FluentIterable.from(people)
+                .filter(person -> {
+                    return person.getCompanyName().equals(name);
+                }).toList();
+    }
+
 }

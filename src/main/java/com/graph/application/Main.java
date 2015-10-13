@@ -13,7 +13,7 @@ public class Main {
         Path pathCompany = Paths.get(args[0]);
         Path pathPeople = Paths.get(args[1]);
 
-        String people = new FileProcessor(pathCompany, pathPeople).getPeople().toString();
+        String people = new FileProcessor(pathCompany, pathPeople).companyPeopleGraph().toString();
 
         System.out.println("all people are:" + people);
 

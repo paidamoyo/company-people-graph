@@ -22,8 +22,10 @@ public class FileProcessor {
     }
 
 
-    public List<Person> getPeople() {
-        final List<Company> companies = new CompanyProcessor(pathCompany).getCompanies();
-        return new PeopleProcessor(pathPeople).getPeople(companies);
+    public List<Company> companyPeopleGraph() {
+        List<Person> people = new PeopleProcessor(pathPeople).getPeople();
+        return new CompanyProcessor(pathCompany).getCompanies(people);
     }
+
+
 }
