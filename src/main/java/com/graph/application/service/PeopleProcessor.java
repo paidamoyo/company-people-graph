@@ -10,10 +10,10 @@ import com.graph.domain.Person;
 
 public class PeopleProcessor {
 
-    public static final int PERSON_LINE_ITEM_LENGTH = 3;
-    public static final int FULL_NAME_ARRAY_LENGTH = 2;
-    public static final String PERSON_LINE_ITEM_SEPARATOR = ",";
-    public static final String NAME_SURNAME_SEPARATOR = " ";
+    private static final int PERSON_LINE_ITEM_LENGTH = 3;
+    private static final int FULL_NAME_ARRAY_LENGTH = 2;
+    private static final String PERSON_LINE_ITEM_SEPARATOR = ",";
+    private static final String NAME_SURNAME_SEPARATOR = " ";
     private Path path;
 
 

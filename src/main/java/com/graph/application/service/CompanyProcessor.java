@@ -12,8 +12,8 @@ import com.graph.domain.Person;
 
 public class CompanyProcessor {
 
-    public static final int COMPANY_LINE_ITEMS_LENGTH = 2;
-    public static final String COMPANY_LINE_ITEMS_SEPARATOR = ",";
+    private static final int COMPANY_LINE_ITEMS_LENGTH = 2;
+    private static final String COMPANY_LINE_ITEMS_SEPARATOR = ",";
     private Path path;
 
 
