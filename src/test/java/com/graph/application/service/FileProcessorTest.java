@@ -25,7 +25,7 @@ public class FileProcessorTest {
     }
 
     @Test
-    public void shouldProcessWellFormattedCompanies() throws Exception {
+    public void shouldProcessWellFormattedFiles() throws Exception {
         //given
 
         Path pathCompany = Paths.get(String.format("%s/src/test/resources/Companies.txt", currentDirectory.toString()));
