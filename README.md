@@ -7,12 +7,14 @@ company-people-graph
 
 2. Install Java 1.8
 
-## Build and run tests
+## Run tests
 
 ```
-./gradlew
+./gradlew test
 ```
 ## Run application
+
+*Provide the full path to the Companies.txt and People.txt files. The order matters :)
 
 ```
 ./gradlew run '-PfilePaths=companyTxtFilePath,peopleTxtFilePath'
@@ -28,5 +30,4 @@ Anytime you adjust the gradle build files, you have to rerun `./gradlew idea` an
 let the IDE reload the project.
 
 * Install "lombok" plugin & Enable: Settings -> Compiler -> Annotation Processor -> Enable annotation processing
-* Enable: Settings -> Editor -> Appearance -> Show line numbers
-* Disable: Settings -> Editor -> Allow placement of caret after end of line
+
