@@ -8,7 +8,7 @@ import java.util.List;
 import com.google.common.collect.FluentIterable;
 import com.graph.domain.Person;
 
-public class PeopleProcessor {
+public class PeopleProcessor implements FileProcessorBase<Person> {
 
     private static final int PERSON_LINE_ITEM_LENGTH = 3;
     private static final int FULL_NAME_ARRAY_LENGTH = 2;
@@ -21,14 +21,19 @@ public class PeopleProcessor {
         this.path = path;
     }
 
+    @Override
+    public List<Person> process() {
+        return getPeople();
+    }
+
     public List<Person> getPeople() {
 
         try {
-            return FluentIterable.from(Files.readAllLines(path))
+            return FluentIterable.from(Files.readAllLines(this.path))
                     .transform(this::createPerson)
                     .toList();
         } catch (IOException e) {
-            String message = "error reading file: " + path + " ";
+            String message = "error reading file: " + this.path + " ";
             System.out.println(message + e);
             throw new PeopleProcessorException(message, e);
 
@@ -62,6 +67,7 @@ public class PeopleProcessor {
         System.out.println(message);
         throw new PeopleProcessorException(message);
     }
+
 
 
 }

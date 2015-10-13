@@ -10,15 +10,29 @@ import com.google.common.collect.ImmutableList;
 import com.graph.domain.Company;
 import com.graph.domain.Person;
 
-public class CompanyProcessor {
+public class CompanyProcessor implements FileProcessorBase<Company> {
 
     private static final int COMPANY_LINE_ITEMS_LENGTH = 2;
     private static final String COMPANY_LINE_ITEMS_SEPARATOR = ",";
     private Path path;
 
 
+    private PeopleProcessor peopleProcessor;
+
+
     public CompanyProcessor(Path path) {
         this.path = path;
+    }
+
+
+    public CompanyProcessor(PeopleProcessor peopleProcessor, Path path) {
+        this.peopleProcessor = peopleProcessor;
+        this.path = path;
+    }
+
+    @Override
+    public List<Company> process() {
+        return getCompanies(this.peopleProcessor.process());
     }
 
     public List<Company> getCompanies(List<Person> people) {
@@ -56,5 +70,6 @@ public class CompanyProcessor {
                     return person.getCompanyName().equals(name);
                 }).toList();
     }
+
 
 }

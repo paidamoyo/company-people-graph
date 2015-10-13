@@ -22,7 +22,7 @@ public class FileProcessor {
     }
 
 
-    public List<Company> companyPeopleGraph() {
+    public List<Company> process() {
         List<Person> people = new PeopleProcessor(pathPeople).getPeople();
         return new CompanyProcessor(pathCompany).getCompanies(people);
     }

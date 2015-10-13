@@ -35,7 +35,7 @@ public class FileProcessorTest {
         FileProcessor fileProcessor = new FileProcessor(pathCompany, pathPeople);
 
         //when
-        List<Company> companies = fileProcessor.companyPeopleGraph();
+        List<Company> companies = fileProcessor.process();
 
         //then
 
