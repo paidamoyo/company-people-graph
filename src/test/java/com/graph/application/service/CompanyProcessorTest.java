@@ -43,7 +43,7 @@ public class CompanyProcessorTest {
         //then
         Company allanGray = Company.from("Allan Gray", "Cape Town", Collections.singletonList(benny));
         Company fitKey = Company.from("FitKey", "Joburg", Arrays.asList(evan,kelvin,joshua));
-        Company thoughtWorks = Company.from("ThoughtWorks", "Joburg", Collections.EMPTY_LIST);
+        Company thoughtWorks = Company.from("ThoughtWorks", "Joburg", Collections.emptyList());
         assertThat(companies, is(Arrays.asList(allanGray, fitKey, thoughtWorks)));
     }
 
@@ -56,7 +56,7 @@ public class CompanyProcessorTest {
 
         //when
 
-        companyProcessor.getCompanies(Collections.EMPTY_LIST);
+        companyProcessor.getCompanies(Collections.emptyList());
 
         //then
     }
@@ -70,7 +70,7 @@ public class CompanyProcessorTest {
         CompanyProcessor companyProcessor = new CompanyProcessor(Paths.get(pathCompany));
 
         //when
-        companyProcessor.getCompanies(Collections.EMPTY_LIST);
+        companyProcessor.getCompanies(Collections.emptyList());
 
         //then
     }

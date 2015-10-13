@@ -46,7 +46,7 @@ public class FileProcessorTest {
 
         Company allanGray = Company.from("Allan Gray", "Cape Town", Collections.singletonList(benny));
         Company fitKey = Company.from("FitKey", "Joburg", Arrays.asList(evan, kelvin, joshua));
-        Company thoughtWorks = Company.from("ThoughtWorks", "Joburg", Collections.EMPTY_LIST);
+        Company thoughtWorks = Company.from("ThoughtWorks", "Joburg", Collections.emptyList());
 
 
         assertThat(companies, is(Arrays.asList(allanGray, fitKey, thoughtWorks)));
