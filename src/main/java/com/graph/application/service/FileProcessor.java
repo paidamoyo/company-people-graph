@@ -23,7 +23,7 @@ public class FileProcessor {
 
 
     public List<Company> process() {
-        List<Person> people = new PeopleProcessor(pathPeople).getPeople();
+        List<Person> people = new PeopleProcessor(pathPeople).process();
         return new CompanyProcessor(pathCompany).getCompanies(people);
     }
 

@@ -31,7 +31,7 @@ public class PeopleProcessorTest {
 
 
         //when
-        List<Person> people = peopleProcessor.getPeople();
+        List<Person> people = peopleProcessor.process();
 
         //then
         Person benny = Person.from("Benny", "Ou", "bennyou.cpt@gmail.com", "Allan Gray");
@@ -51,7 +51,7 @@ public class PeopleProcessorTest {
         PeopleProcessor peopleProcessor = new PeopleProcessor(pathPeople);
 
         //when
-        peopleProcessor.getPeople();
+        peopleProcessor.process();
 
         //then
 
@@ -64,7 +64,7 @@ public class PeopleProcessorTest {
         PeopleProcessor peopleProcessor = new PeopleProcessor(pathPeople);
 
         //when
-        peopleProcessor.getPeople();
+        peopleProcessor.process();
 
         //then
 
@@ -78,7 +78,7 @@ public class PeopleProcessorTest {
 
 
         //when
-        peopleProcessor.getPeople();
+        peopleProcessor.process();
 
         //then
 

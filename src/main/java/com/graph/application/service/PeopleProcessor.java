@@ -26,7 +26,7 @@ public class PeopleProcessor implements FileProcessorBase<Person> {
         return getPeople();
     }
 
-    public List<Person> getPeople() {
+    private List<Person> getPeople() {
 
         try {
             return FluentIterable.from(Files.readAllLines(this.path))
