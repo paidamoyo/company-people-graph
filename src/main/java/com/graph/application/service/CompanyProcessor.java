@@ -14,16 +14,9 @@ public class CompanyProcessor implements FileProcessorBase<Company> {
 
     private static final int COMPANY_LINE_ITEMS_LENGTH = 2;
     private static final String COMPANY_LINE_ITEMS_SEPARATOR = ",";
+
     private Path path;
-
-
     private PeopleProcessor peopleProcessor;
-
-
-    public CompanyProcessor(Path path) {
-        this.path = path;
-    }
-
 
     public CompanyProcessor(PeopleProcessor peopleProcessor, Path path) {
         this.peopleProcessor = peopleProcessor;
@@ -35,7 +28,7 @@ public class CompanyProcessor implements FileProcessorBase<Company> {
         return getCompanies(this.peopleProcessor.process());
     }
 
-    public List<Company> getCompanies(List<Person> people) {
+    private List<Company> getCompanies(List<Person> people) {
 
         try {
             return FluentIterable.from(Files.readAllLines(path))
