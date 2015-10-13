@@ -3,7 +3,6 @@ package com.graph.application.view;
 import java.util.Arrays;
 import java.util.Collections;
 
-import org.junit.Ignore;
 import org.junit.Test;
 
 import com.graph.domain.Company;
@@ -14,7 +13,6 @@ import static org.hamcrest.core.Is.is;
 public class CompanyPeopleGraphTest {
 
     @Test
-    @Ignore("Some syntax issue")
     public void shouldDisplay() throws Exception {
 
         //given
@@ -47,8 +45,7 @@ public class CompanyPeopleGraphTest {
                 .append("\t").append("\t").append("Kelvin,Smith,kelvin@fitkey.co.za").append("\n")
                 .append("\t").append("ThoughtWorks").append("\n");
 
-
-        assertThat(graph,is(expected));
+        assertThat(graph.toString(), is(expected.toString()));
 
     }
 }
